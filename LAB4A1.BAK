@@ -1,0 +1,97 @@
+#include<stdio.h>
+#include<conio.h>
+
+#define UP	0x48
+#define down	0x50
+#define HOME	0x10 //HOME
+#define end	0x08 //BACK SPACE
+
+#define ENTER	0xD
+#define ESC	0x1B
+#define norm_at 0x07
+#define highlig	0x70
+
+#define new	 0
+#define Display  1
+#define exit	 2
+#define NULL	 0
+
+void main(void)
+{
+char ch,ch1;
+char Menu[3][10] = {" NEW      "," DISPLAY  "," EXIT     "};
+int i,j;
+int term=0,pos=0;
+int col,row;
+do
+{
+clrscr();
+//flushall();
+for(i=0;i<3;i++)          
+{
+for(j=0;j<10;j++)
+{
+printf("%c",Menu[i][j]);
+}
+printf("\n");
+}
+gotoxy(1,1);
+printf(">");
+gotoxy(1,4);
+getch();
+
+ch = getch();
+switch(ch)
+{
+case NULL:
+{
+ch1 = getch();
+switch(ch1)
+{
+case UP:
+pos--;
+if(pos<1)
+pos=3;
+gotoxy(pos,1);
+printf(">");
+break;
+case down:
+pos++;
+if(pos>3)
+pos=1;
+gotoxy(pos,1);
+printf(">");
+break;
+case HOME:pos=1;gotoxy(pos,1);printf(">");break;
+case end:pos=3;gotoxy(pos,1);printf(">");break;
+}
+}
+break;
+case ENTER:
+printf("YOU CHOSE NEW !!!");
+getch();      
+break;
+case ESC:
+term=1;
+break;
+}
+}while(!term);
+/*
+if(getch()=='\033')
+{
+getch();
+switch(getch())
+{
+case 72:
+printf("x");
+break;
+case 80:
+printf("o");
+break;
+}
+}
+*/
+gotoxy(1,1);
+printf(">");
+getch();
+}
